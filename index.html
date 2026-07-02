@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weld Services | Are You Ready to Join the Crew?</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+background:#20242a;
+color:white;
+}
+
+header{
+background:#ff8c00;
+padding:25px;
+text-align:center;
+box-shadow:0 3px 10px rgba(0,0,0,.4);
+}
+
+header h1{font-size:42px;}
+header p{margin-top:10px;font-size:18px;}
+
+.container{
+width:90%;
+max-width:850px;
+margin:40px auto;
+background:#2d333b;
+padding:35px;
+border-radius:12px;
+box-shadow:0 0 25px rgba(0,0,0,.5);
+}
+
+.progress{
+width:100%;
+height:20px;
+background:#555;
+border-radius:20px;
+overflow:hidden;
+margin-bottom:30px;
+}
+
+.bar{
+width:0%;
+height:100%;
+background:#ff9800;
+transition:.4s;
+}
+
+.page{display:none;}
+.page.active{display:block;}
+
+h2{margin-bottom:20px;}
+
+label{
+display:block;
+margin-top:18px;
+font-weight:bold;
+}
+
+input,select,textarea{
+width:100%;
+padding:12px;
+margin-top:8px;
+border:none;
+border-radius:6px;
+font-size:16px;
+}
+
+button{
+margin-top:30px;
+padding:14px 30px;
+background:#ff9800;
+color:white;
+font-size:18px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+button:hover{background:#e68a00;}
+
+.loader{
+display:none;
+text-align:center;
+padding:80px;
+}
+
+.spinner{
+width:90px;
+height:90px;
+border:10px solid #555;
+border-top:10px solid orange;
+border-radius:50%;
+margin:auto;
+animation:spin 1s linear infinite;
+}
+
+@keyframes spin{100%{transform:rotate(360deg);}}
+
+#finalScreen{
+display:none;
+text-align:center;
+padding:60px;
+}
+
+#finalScreen h1{
+font-size:52px;
+color:#ff9800;
+}
+
+.rickButton{
+background:#00b894;
+font-size:22px;
+padding:18px 35px;
+}
+
+footer{
+text-align:center;
+padding:25px;
+color:#aaa;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🏗️ Weld Services</h1>
+<p>Are You Ready to Join the Crew?</p>
+</header>
+
+<div class="container">
+
+<div class="progress">
+<div class="bar" id="bar"></div>
+</div>
+
+<!-- PAGE 1 -->
+<div class="page active">
+<h2>Step 1 - Tell Us About Yourself</h2>
+
+<label>Name</label>
+<input type="text" name="name">
+
+<label>Favorite Construction Tool</label>
+<select name="tool">
+<option></option>
+<option>Hammer</option>
+<option>Impact Driver</option>
+<option>Welder</option>
+<option>Excavator</option>
+<option>Tape Measure</option>
+</select>
+
+<label>Dream project</label>
+<textarea rows="5" name="dream"></textarea>
+
+<button onclick="nextPage()">Next</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+<h2>Step 2 - Safety First</h2>
+
+<label>Most important rule?</label>
+<select name="safety1">
+<option></option>
+<option>Get it done fast no matter what</option>
+<option>Look cool while working</option>
+<option>Safety comes first</option>
+<option>Let someone else figure it out</option>
+</select>
+
+<label>PPE use?</label>
+<select name="safety2">
+<option></option>
+<option>Yes</option>
+<option>No</option>
+<option>Only sometimes</option>
+</select>
+
+<label>Unsafe worker?</label>
+<select name="safety3">
+<option></option>
+<option>Ignore it</option>
+<option>Report it</option>
+<option>Join them</option>
+<option>Film it for TikTok</option>
+</select>
+
+<button onclick="prevPage()">Back</button>
+<button onclick="nextPage()">Next</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+<h2>Step 3 - Crew Skills</h2>
+
+<label>Work style</label>
+<select name="style">
+<option></option>
+<option>Solo</option>
+<option>Small team</option>
+<option>Large crew chaos</option>
+<option>Boss</option>
+</select>
+
+<label>Strongest skill</label>
+<input type="text" name="skill">
+
+<label>Role</label>
+<select name="role">
+<option></option>
+<option>Welder</option>
+<option>Framer</option>
+<option>Operator</option>
+<option>Electrician helper</option>
+<option>Carry stuff</option>
+</select>
+
+<button onclick="prevPage()">Back</button>
+<button onclick="nextPage()">Next</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+<h2>Final Check</h2>
+
+<label>How badly do you want in?</label>
+<select name="want">
+<option></option>
+<option>Not really</option>
+<option>Somewhat</option>
+<option>Very</option>
+<option>ABSOLUTELY</option>
+</select>
+
+<label>Comments</label>
+<textarea rows="5" name="comments"></textarea>
+
+<button onclick="prevPage()">Back</button>
+<button onclick="submitForm()">Submit</button>
+</div>
+
+<!-- LOADER -->
+<div class="loader" id="loader">
+<div class="spinner"></div>
+<h2>Calculating your Crew Score...</h2>
+</div>
+
+<!-- FINAL -->
+<div id="finalScreen">
+<h1>🎉 Congratulations 🎉</h1>
+<p>YOU JUST GOT RICKROLLED!</p>
+
+<button class="rickButton" onclick="rickroll()">
+Watch Your Result
+</button>
+</div>
+
+<footer>© 2026 Weld Services (Fictional)</footer>
+
+</div>
+
+<script>
+let currentPage = 0;
+const pages = document.querySelectorAll(".page");
+const bar = document.getElementById("bar");
+const loader = document.getElementById("loader");
+const finalScreen = document.getElementById("finalScreen");
+
+const answers = {};
+
+function showPage(index){
+pages.forEach((p,i)=>{
+p.classList.toggle("active", i === index);
+});
+
+bar.style.width = ((index) / (pages.length - 1)) * 100 + "%";
+}
+
+function validatePage(){
+const inputs = pages[currentPage].querySelectorAll("input, select, textarea");
+
+for (let el of inputs){
+if (!el.value.trim()){
+alert("Please complete all fields before continuing.");
+return false;
+}
+}
+return true;
+}
+
+function savePage(){
+const inputs = pages[currentPage].querySelectorAll("input, select, textarea");
+answers[`page${currentPage}`] = [...inputs].map(i => i.value);
+}
+
+function nextPage(){
+if (!validatePage()) return;
+
+savePage();
+
+if(currentPage < pages.length - 1){
+currentPage++;
+showPage(currentPage);
+}
+}
+
+function prevPage(){
+if(currentPage > 0){
+currentPage--;
+showPage(currentPage);
+}
+}
+
+function submitForm(){
+if (!validatePage()) return;
+
+savePage();
+
+pages.forEach(p => p.style.display = "none");
+document.querySelector(".progress").style.display = "none";
+
+loader.style.display = "block";
+
+setTimeout(()=>{
+loader.style.display = "none";
+finalScreen.style.display = "block";
+}, 2000);
+}
+
+function rickroll(){
+window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+}
+
+showPage(0);
+</script>
+
+</body>
+</html>
